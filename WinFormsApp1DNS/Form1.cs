@@ -134,16 +134,56 @@ public partial class Form1 : Form
 
     private async void button1_Click(object sender, EventArgs e)
     {
-        //Thread thread = new Thread(WriteFile);
-        //thread.Start("text");
-
-        //await WriteFileAsync("text");
-
-        //WriteFile("text");//UI Thread blocked
-
-        int result = await MakeMathOperation();
-        Debug.WriteLine(result);
+        textBoxPing.Clear();
+        string[] sites =
+        {
+            "ox.ac.uk",
+            "uic.es",
+            "CERN.ch",
+            "mit.edu",
+            "stanford.edu",
+            "nasa.gov",
+            "u-tokyo.ac.jp",
+            "nus.edu.sg",
+            "unimelb.edu.au",
+            "nyu.edu"
+        };
+        using HttpClient client = new HttpClient();
+        foreach(string site in sites)
+        {
+            string url = site;
+            if(!url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                url = "https://" + site;
+            }
+            bool isActive= false;
+            try
+            {
+                using HttpResponseMessage response = await client.GetAsync(url);
+                isActive = response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                isActive = false;
+            }
+            textBoxPing.Text += $"{site}: {isActive}\n"+Environment.NewLine;
+        }
     }
+
+
+
+    //private async void button1_Click(object sender, EventArgs e)
+    //{
+    //    //Thread thread = new Thread(WriteFile);
+    //    //thread.Start("text");
+
+    //    //await WriteFileAsync("text");
+
+    //    //WriteFile("text");//UI Thread blocked
+
+    //    int result = await MakeMathOperation();
+    //    Debug.WriteLine(result);
+    //}
     //write txt file sync
     private void WriteFile(string text)
     {
@@ -203,18 +243,18 @@ public partial class Form1 : Form
     private async void buttonPing3_Click(object sender, EventArgs e)
     {
         textBoxPing.Clear();
-        string ip=textBoxIpAddress.Text.Trim();
-        if(!string.IsNullOrEmpty(ip))
+        string ip = textBoxIpAddress.Text.Trim();
+        if (!string.IsNullOrEmpty(ip))
         {
             try
             {
-                using Ping ping= new Ping();
-                for (int i=1;i<=3;i++)
+                using Ping ping = new Ping();
+                for (int i = 1; i <= 3; i++)
                 {
-                    PingReply reply = await ping.SendPingAsync(ip,2000);
+                    PingReply reply = await ping.SendPingAsync(ip, 2000);
                     if (reply.Status == IPStatus.Success)
                     {
-                        textBoxPing.AppendText($"{i}. Ping to {ip}:Succes.Time:{reply.RoundtripTime}ms."+Environment.NewLine);
+                        textBoxPing.AppendText($"{i}. Ping to {ip}:Succes.Time:{reply.RoundtripTime}ms." + Environment.NewLine);
                     }
                     else
                     {
@@ -223,11 +263,13 @@ public partial class Form1 : Form
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 textBoxPing.AppendText($" Ping to {ip} error :{ex.Message}" + Environment.NewLine);
             }
             await Task.Delay(1000);
         }
     }
+
+    
 }

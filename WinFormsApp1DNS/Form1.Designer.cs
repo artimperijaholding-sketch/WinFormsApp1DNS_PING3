@@ -125,7 +125,7 @@
             // 
             // buttonPing
             // 
-            buttonPing.Location = new Point(227, 276);
+            buttonPing.Location = new Point(539, 268);
             buttonPing.Name = "buttonPing";
             buttonPing.Size = new Size(75, 23);
             buttonPing.TabIndex = 9;
@@ -135,17 +135,17 @@
             // 
             // button1
             // 
-            button1.Location = new Point(539, 10);
+            button1.Location = new Point(483, 10);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(131, 23);
             button1.TabIndex = 10;
-            button1.Text = "Tasks";
+            button1.Text = "Sites Universitet";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // buttonGet
             // 
-            buttonGet.Location = new Point(227, 320);
+            buttonGet.Location = new Point(539, 175);
             buttonGet.Name = "buttonGet";
             buttonGet.Size = new Size(75, 23);
             buttonGet.TabIndex = 11;
@@ -155,7 +155,7 @@
             // 
             // textBoxOutput
             // 
-            textBoxOutput.Location = new Point(316, 222);
+            textBoxOutput.Location = new Point(207, 176);
             textBoxOutput.Multiline = true;
             textBoxOutput.Name = "textBoxOutput";
             textBoxOutput.Size = new Size(298, 124);
@@ -177,7 +177,7 @@
             textBoxPing.Multiline = true;
             textBoxPing.Name = "textBoxPing";
             textBoxPing.ScrollBars = ScrollBars.Vertical;
-            textBoxPing.Size = new Size(310, 156);
+            textBoxPing.Size = new Size(310, 126);
             textBoxPing.TabIndex = 14;
             // 
             // Form1
